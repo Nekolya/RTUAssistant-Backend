@@ -1,7 +1,10 @@
 from app import app
 from flask import Flask, flash, request, redirect, url_for, session, jsonify, render_template, make_response
 import requests
+import jwt
+from os import environ 
 
+SECRET = environ.get('SECRET')
 
 def index(): 
     # if request.method == "POST":

@@ -3,13 +3,17 @@ from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from os import environ 
+from flask_redis import Redis
 
 app = Flask(__name__)
 CORS(app)
+redis = Redis(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] =  environ.get('DBURL')
+SECRET = environ.get('SECRET')
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+
 
 from app import views
 
