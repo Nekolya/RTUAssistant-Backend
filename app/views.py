@@ -8,26 +8,13 @@ from . import get_user_by_pk, user_login
 
 SECRET = environ.get('SECRET')
 
-def index(): 
-    # if request.method == "POST":
-    #     req = request.get_json(force=True)
-    #     if req['type'] == "parse_data_yandex":
-    #         res = parse_data_yandex(req)
-    #         return make_response(res)
-        
-    #     elif req['type'] == "get_image_list":
-    #         print('req = ', req)
-    #         res = jsonify({ "status": 200, "image_ids": arr })
-    #         return make_response()
-
-    return ''
-
 ####
 @app.route('/auth/login', methods=["POST", "GET", "OPTIONS"])
 def login():
     req = request.get_json(force=True)
     login = req['login']
     passw = req['password']
+    fingerprint = req['fingerprint']
     status = ""
     user = user_login(login, passw)
     if user:

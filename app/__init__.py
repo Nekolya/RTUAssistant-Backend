@@ -3,13 +3,11 @@ from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from os import environ 
-from flask_redis import Redis
 from sqlalchemy import Table, Column, Integer, String, ForeignKey
 
 
 app = Flask(__name__)
 CORS(app)
-redis = Redis(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] =  environ.get('DBURL')
 SECRET = environ.get('SECRET')
@@ -22,6 +20,7 @@ from app import views
 class UserModel(db.Model):
     __tablename__ = 'User'
     id = db.Column(db.Integer, primary_key=True)
+    fingerprint = db.Column(db.String())
     login = db.Column(db.String())
     password_hash = db.Column(db.String())
     status = db.Column(db.String())
